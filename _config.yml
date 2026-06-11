@@ -234,4 +234,4 @@ plugins:
   - jekyll-archives
   - jekyll-sitemap
   - jekyll-include-cache
-  - jekyll-remote-theme # <-- Crucial: This plugin reads the remote_theme key
+  # - jekyll-remote-theme # <-- Crucial: This plugin reads the remote_theme key
