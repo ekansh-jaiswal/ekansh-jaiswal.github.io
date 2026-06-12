@@ -1,0 +1,56 @@
+title: The Ultimate Chirpy Markdown Cheat Sheet
+author: Ekansh Jaiswal
+date: 2026-06-12 12:00:00 +0530
+categories: [Resources, CheatSheets]
+tags: [markdown, kramdown, jekyll, chirpy, guide]Welcome to your centralized reference guide for writing posts in the Chirpy Jekyll theme. This file showcases all standard and advanced Markdown syntax capabilities, along with practical cybersecurity and computer science use cases for each.1. Headers & Document HierarchyUse headers to structure your write-ups. Kramdown automatically uses these to generate the interactive Table of Contents (TOC) on the right sidebar of your blog.# Header 1 (Use only for the main document title if not using front matter)
+## Header 2 (Primary sections: e.g., ## Exploitation)
+### Header 3 (Sub-sections: e.g., ### Step 1: Reconnaissance)
+#### Header 4 (Minor sections/points)
+##### Header 5 (Rarely used)
+
+2. Text Formatting & Emphasis
+Control the typography of your writeups to highlight file paths, crucial actions, or terminal operations.
+Syntax Markdown Example Rendered Result Practical Use CaseBold**Privilege Escalation Achieved**Privilege Escalation AchievedHighlighting key milestonesItalics*Requires active cookie*Requires active cookieSide notes, caveats, or assumptions~~Strikethrough~~~~Deprecated Payload~~~~Deprecated Payload~~Documenting patched/outdated exploitsInline Code`/etc/passwd`/etc/passwdFile paths, variables, and commands
+
+3. Advanced Code BlocksChirpy offers robust code styling options. By adding parameters next to the triple-backtick language definition, you can render clean metadata directly on the code container.A. Filename HeadersAdd title="your_filename" to display a stylized title bar above your code. Great for configuration files or exploit scripts.<?php
+  // This renders with a beautiful file tab on top of the block
+  if (isset($_REQUEST['cmd'])) {
+      passthru($_REQUEST['cmd']);
+  }
+?>
+B. Forced Line NumbersAdd {line_numbers: true} to display line numbers. This makes it incredibly easy to reference specific lines later in your written explanation.import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(("0.0.0.0", 4444))
+server.listen(1)
+print("[+] Listening for incoming shells...")
+
+4. Pure Markdown Callout Boxes (IAL Styles)If you hate writing raw HTML <div> blocks or blockquotes (>), you can style plain text paragraphs instantly into custom, color-coded alert containers. Simply write your text, and append the selector class on the line immediately following it.
+Tip Box (Green)This is an extraction success tip. Perfect for highlighting quick shortcuts, handy commands, or CTF hints.
+{:.box-tip}Info Box (Blue)This is a standard information box. Use this to provide background context or reference technical RFC specifications.
+{:.box-info}Warning Box (Orange)This is a warning notification. Great for advising readers about unstable environments or easily missed configuration flags.
+{:.box-warning}Danger Box (Red)This is a high-risk security alert. Excellent for warnings regarding rate-limits, active firewalls, or commands that might crash a local service.
+{:.box-danger}
+
+5. Text Alignment Controls
+You can shift text positions on the fly using Kramdown's block-level alignment features. Useful for centering images, logs, or custom section endings.This text block is perfectly aligned to the center of your site page.
+{:.text-center}This text block is aligned to the right margin.{:.text-right}
+
+6. Functional Checklists (Task Lists)
+Keep track of your attack methodology, penetration testing scopes, or engineering checklists.
+[x] Phase 1: Port scanning and service fingerprinting
+[x] Phase 2: Web directory enumeration (feroxbuster)
+[ ] Phase 3: Exploiting LFI to obtain a reverse shell
+[ ] Phase 4: Local privilege escalation audit (linpeas)
+
+7. Interactive Content Tabs
+You can present multiple options (e.g., showing how to do something in Python vs. Go, or Linux vs. Windows) in a single horizontal space using native Markdown headers.
+Tab Python Tab Bash 
+This content is active when the Tab Python header is selected.print("Hello from Python!")
+This content is active when the Tab Bash header is selected.echo "Hello from Bash!"
+
+8. Mathematics and Cryptography Notation (LaTeX)
+Chirpy has built-in support for rendering math equations beautifully. Use single $ for inline formulas, and double $$ for block-level formulas.
+Inline: The security of RSA depends on the difficulty of finding the prime factors of $N = p \times q$.Block Formula:$$E(x) = (x^e) \pmod N$$9. 
+Formatting Keyboard InputsIf you want to instruct your readers to press physical keyboard keys, wrap the key name in <kbd> tags (this is the only HTML allowed as it has no clean Markdown alternative, but Chirpy styles it perfectly).
+To save your file and exit the terminal editor, press Ctrl + O and then Ctrl + X.
