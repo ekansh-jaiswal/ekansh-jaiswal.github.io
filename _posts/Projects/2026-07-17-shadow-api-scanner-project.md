@@ -56,7 +56,7 @@ handling patient data.
 The pipeline runs through four stages. Every single one of them is a plain yes/no or a fixed
 formula, nothing fuzzy anywhere in it.
 
-![Shadow API Scanner system flow](/assets/img/shadowapi-system-flow.svg)
+![Shadow API Scanner system flow](/assets/img/shadowapi-system-flow.png)
 _Fig. 1 — how data actually moves through the scanner, end to end_
 
 **Stage 1 — is it in the spec?** For every endpoint the logs show real traffic for, the tool
@@ -82,7 +82,7 @@ match, no confidence percentage :
   up here at all (API9:2023, Improper Inventory Management)
 - **BOLA (Cross-User Access)** — the one I actually care about the most, explained below
 
-![Decision flow: raw request to severity score](/assets/img/shadowapi-decision-flow.svg)
+![Decision flow: raw request to severity score](/assets/img/shadowapi-decision-flow.png)
 _Fig. 2 — how a raw request becomes a labeled endpoint, then a severity score_
 
 **Stage 3 — add up the weight.** Each check that fires adds a fixed number of points based on
