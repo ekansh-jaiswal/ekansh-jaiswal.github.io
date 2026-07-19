@@ -17,7 +17,7 @@ Scanner. It's a Python CLI tool that finds "Shadow APIs" — endpoints that are 
 real traffic but were never documented anywhere — and then actually checks whether they're
 exploitable instead of just guessing.
 
-No machine learning anywhere in this. Every single finding traces back to one plain rule you
+No LLM anywhere in this. Every single finding traces back to one plain rule you
 can read directly in the code, which matters a lot for a security tool specifically. If
 something gets flagged, you should be able to ask "why," and get a real answer, not "the model
 was pretty confident."
