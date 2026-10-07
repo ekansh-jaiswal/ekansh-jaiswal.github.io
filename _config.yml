@@ -191,35 +191,35 @@ defaults:
       type: posts
     values:
       image:
-        path: /assets/img/wargames/otw-bandit.png
+        path: /assets/img/otw-bandit.png
         alt: "OverTheWire Bandit write-ups"
   - scope:
       path: "_posts/Wargames/Century"
       type: posts
     values:
       image:
-        path: /assets/img/wargames/windows.png
+        path: /assets/img/windows.png
         alt: "UnderTheWire Century write-ups"
   - scope:
       path: "_posts/Wargames/Cyborg"
       type: posts
     values:
       image:
-        path: /assets/img/wargames/windows.png
+        path: /assets/img/windows.png
         alt: "UnderTheWire Cyborg write-ups"
   - scope:
       path: "_posts/Wargames/Leviathan"
       type: posts
     values:
       image:
-        path: /assets/img/wargames/rev_eng.png
+        path: /assets/img/rev_eng.png
         alt: "OverTheWire Leviathan write-ups"
   - scope:
       path: "_posts/Wargames/Nata"
       type: posts
     values:
       image:
-        path: /assets/img/wargames/web_app.jpg
+        path: /assets/img/web_app.jpg
         alt: "OverTheWire Natas write-ups"
   - scope:
       path: _drafts
