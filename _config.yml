@@ -175,6 +175,7 @@ collections:
     sort_by: order
 
 defaults:
+
   - scope:
       path: "" # An empty string here means all files in the project
       type: posts
@@ -185,6 +186,41 @@ defaults:
       # DO NOT modify the following parameter unless you are confident enough
       # to update the code of all other post links in this project.
       permalink: /posts/:title/
+  - scope:
+      path: "_posts/Wargames/Bandit"
+      type: posts
+    values:
+      image:
+        path: /assets/img/wargames/otw-bandit.png
+        alt: "OverTheWire Bandit write-ups"
+  - scope:
+      path: "_posts/Wargames/Century"
+      type: posts
+    values:
+      image:
+        path: /assets/img/wargames/windows.png
+        alt: "UnderTheWire Century write-ups"
+  - scope:
+      path: "_posts/Wargames/Cyborg"
+      type: posts
+    values:
+      image:
+        path: /assets/img/wargames/windows.png
+        alt: "UnderTheWire Cyborg write-ups"
+  - scope:
+      path: "_posts/Wargames/Leviathan"
+      type: posts
+    values:
+      image:
+        path: /assets/img/wargames/rev_eng.png
+        alt: "OverTheWire Leviathan write-ups"
+  - scope:
+      path: "_posts/Wargames/Nata"
+      type: posts
+    values:
+      image:
+        path: /assets/img/wargames/web_app.jpg
+        alt: "OverTheWire Natas write-ups"
   - scope:
       path: _drafts
     values:
