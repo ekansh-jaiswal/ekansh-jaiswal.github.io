@@ -191,7 +191,7 @@ defaults:
       type: posts
     values:
       image:
-        path: /assets/img/otw-bandit.png
+        path: /assets/img/otw_bandit.png
         alt: "OverTheWire Bandit write-ups"
   - scope:
       path: "_posts/Wargames/Century"
