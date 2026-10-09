@@ -198,14 +198,14 @@ defaults:
       type: posts
     values:
       image:
-        path: /assets/img/windows.png
+        path: /assets/img/windows_century.png
         alt: "UnderTheWire Century write-ups"
   - scope:
       path: "_posts/Wargames/Cyborg"
       type: posts
     values:
       image:
-        path: /assets/img/windows.png
+        path: /assets/img/windows_cyborg.png
         alt: "UnderTheWire Cyborg write-ups"
   - scope:
       path: "_posts/Wargames/Leviathan"
