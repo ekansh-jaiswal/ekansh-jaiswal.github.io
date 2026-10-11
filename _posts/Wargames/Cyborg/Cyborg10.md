@@ -1,0 +1,195 @@
+---
+title: "Cyborg10 Writeup"
+author: ekansh
+date: 2026-10-11 13:23:15 +0530
+categories: [Wargames, Cyborg]
+tags: [underthewire, cyborg]
+published : true
+---
+
+## Objective :
+
+The password for cyborg11 is the description of the Applocker Executable deny policy for ill_be_back.exe PLUS the name of the file on the desktop.
+
+## Solution : 
+
+We first check for the filename present on the desktop : 
+
+```powershell
+PS C:\users\cyborg10\desktop> gci                                                                                                                                                           
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+    Directory: C:\users\cyborg10\desktop                                                                                                                                                    
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+Mode                LastWriteTime         Length Name                                                                                                                                       
+----                -------------         ------ ----                                                                                                                                       
+-a----        8/30/2018  10:45 AM              0 99                                                                                                                                         
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+PS C:\users\cyborg10\desktop>    
+```
+
+First we need to find the location of the actual executable present so we search for it, using powershell. 
+Reference : https://stackoverflow.com/questions/3428044/powershell-script-to-locate-specific-file-file-name
+After searching for a long long time, we finally find the file/executable present at :
+```powershell
+PS C:\users\cyborg10> gci -recurse                                                                                                                                                          
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+    Directory: C:\users\cyborg10                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+Mode                LastWriteTime         Length Name                                                                                                                                       
+----                -------------         ------ ----                                                                                                                                       
+d-r---        8/30/2018  10:45 AM                Desktop                                                                                                                                    
+d-r---        8/30/2018  10:45 AM                Documents                                                                                                                                  
+d-r---        7/16/2016   1:23 PM                Downloads                                                                                                                                  
+d-r---        7/16/2016   1:23 PM                Favorites                                                                                                                                  
+d-r---        7/16/2016   1:23 PM                Links                                                                                                                                      
+d-r---        7/16/2016   1:23 PM                Music                                                                                                                                      
+d-r---        7/16/2016   1:23 PM                Pictures                                                                                                                                   
+d-----        7/16/2016   1:23 PM                Saved Games                                                                                                                                
+d-r---        7/16/2016   1:23 PM                Videos                                                                                                                                     
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+    Directory: C:\users\cyborg10\Desktop                                                                                                                                                    
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+Mode                LastWriteTime         Length Name                                                                                                                                       
+----                -------------         ------ ----                                                                                                                                       
+-a----        8/30/2018  10:45 AM              0 99                                                                                                                                         
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+    Directory: C:\users\cyborg10\Documents                                                                                                                                                  
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+Mode                LastWriteTime         Length Name                                                                                                                                       
+----                -------------         ------ ----                                                                                                                                       
+-a----        8/30/2018   5:52 AM           4532 ill_be_back.exe                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+PS C:\users\cyborg10>   
+```
+Now referring to docs present at : https://learn.microsoft.com/en-us/powershell/module/applocker/get-applockerpolicy?view=windowsserver2025-ps
+and at : https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/use-the-applocker-windows-powershell-cmdlets
+
+We perform the following commands : 
+
+```powershell
+PS C:\users\cyborg10> Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path "C:\users\cyborg10\Documents\ill_be_back.exe"                                                                 
+                                                                                                                                                                                            
+FilePath                                      PolicyDecision MatchingRule                                                                                                                   
+--------                                      -------------- ------------                                                                                                                   
+C:\users\cyborg10\Documents\ill_be_back.exe AllowedByDefault                                                                                                                                
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+PS C:\users\cyborg10> Get-AppLockerPolicy -Effective | Test-AppLockerPolicy -Path "C:\users\cyborg10\Documents\ill_be_back.exe"                                                             
+                                                                                                                                                                                            
+FilePath                                    PolicyDecision MatchingRule                                                                                                                     
+--------                                    -------------- ------------                                                                                                                     
+C:\users\cyborg10\Documents\ill_be_back.exe         Denied C:\Users\cyborg10\Documents\ill_be_back.exe   
+```
+
+Another thing before moving on is to understand what is the difference between both these outputs , since one AppLockerPolicy says that the file is `ALLOWED` to be executed by default
+while another Policy `DENIES` the execution. To understand this I asked Gemini for explanation and here's what he explained : 
+
+```text
+A local policy is the set of AppLocker rules and enforcement settings configured directly on a specific computer using tools like secpol.msc or gpedit.msc.
+An effective policy is the actual combination of rules and restrictions that are actively applied and enforced on that computer after Windows merges local policies with any centralized Active Directory Group Policy Objects (GPOs)
+```
+
+I tried reading the docs as well present at : 
+
+- https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview
+- https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/working-with-applocker-rules
+
+Turns out the `Effective` Group Policy will always supersee the `Local` Policy , so even though Local Policy allows the execution , the `Effective` Policy won't allow the execution. 
+To find out about the Description I had to ask Gemini, and here's what it did : 
+
+```
+Here is the line-by-line breakdown of how the PowerShell script finds and displays your AppLocker rule description:
+
+Import-Module AppLocker
+
+
+* What it does: Loads the official Microsoft AppLocker management cmdlets into your current PowerShell session. Without this, your system wouldn't understand commands like Get-AppLockerPolicy.
+
+------------------------------
+
+$TargetRuleName = "C:\Users\cyborg10\Documents\ill_be_back.exe"
+
+
+* What it does: Creates a variable named $TargetRuleName and stores the exact name of the rule you found in your Test-AppLockerPolicy output. This serves as your search keyword.
+
+------------------------------
+
+[xml]$PolicyXml = Get-AppLockerPolicy -Effective -Xml
+
+
+* What it does: This does two things at once:
+1. Get-AppLockerPolicy -Effective -Xml fetches the entire active AppLocker policy currently enforced on your machine (including local rules and domain GPOs) and outputs it as a raw string of XML data.
+   2. [xml]$PolicyXml converts (casts) that raw text string into a structured, searchable XML object and saves it into the $PolicyXml variable.
+
+------------------------------
+
+$PolicyXml.SelectNodes("//*[local-name()='FilePathRule' or local-name()='FileHashRule' or local-name()='PublisherRule']") | 
+
+
+* What it does: Uses an XPath query (SelectNodes) to dig through the XML structure.
+* It scans the entire document (//) looking for any XML elements matching the three types of AppLocker rules: Path, Hash, or Publisher rules.
+* The pipe symbol (|) sends all found rules down the pipeline to the next command.
+
+------------------------------
+
+    Where-Object { $_.Name -eq $TargetRuleName } | 
+
+
+* What it does: Acts as a filter. It takes the list of rules from the previous step and checks each one individually.
+* $_.Name represents the name of the current rule in the pipeline. It filters the list down to keep only the rule whose name matches your target string ("C:\Users\cyborg10\Documents\ill_be_back.exe").
+
+------------------------------
+
+    Select-Object Name, Action, Description | 
+
+
+* What it does: Pulls out only the specific properties you care about from that matching rule object: the Name, the Action (whether it's Allow or Deny), and the hidden Description text.
+
+------------------------------
+
+    Format-List
+
+
+* What it does: Changes how the final information is printed on your screen. Instead of forcing it into a wide, cut-off table, it displays the Name, Action, and Description stacked vertically in an easy-to-read list layout.
+
+Did the script find a description for you, or did it return an empty field? If it's empty, we can look into event logs to see exactly when and why it was blocked.
+
+```
+
+```powershell
+PS C:\users\cyborg10> Import-Module AppLocker                                                                                                                                               
+PS C:\users\cyborg10>                                                                                                                                                                       
+PS C:\users\cyborg10> # 1. Store the name of the matching rule from your test output                                                                                                        
+PS C:\users\cyborg10> $TargetRuleName = "C:\Users\cyborg10\Documents\ill_be_back.exe"                                                                                                       
+PS C:\users\cyborg10>                                                                                                                                                                       
+PS C:\users\cyborg10> # 2. Get the effective policy as XML                                                                                                                                  
+PS C:\users\cyborg10> [xml]$PolicyXml = Get-AppLockerPolicy -Effective -Xml                                                                                                                 
+PS C:\users\cyborg10>                                                                                                                                                                       
+PS C:\users\cyborg10> # 3. Search all rule types for the matching name and display its description                                                                                          
+PS C:\users\cyborg10> $PolicyXml.SelectNodes("//*[local-name()='FilePathRule' or local-name()='FileHashRule' or local-name()='PublisherRule']") |                                           
+>>     Where-Object { $_.Name -eq $TargetRuleName } |                                                                                                                                       
+>>     Select-Object Name, Action, Description |                                                                                                                                            
+>>     Format-List                                                                                                                                                                          
+>>                                                                                                                                                                                          
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+Name        : C:\Users\cyborg10\Documents\ill_be_back.exe                                                                                                                                   
+Action      : Deny                                                                                                                                                                          
+Description : terminated!                                                                                                                                                                   
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+PS C:\users\cyborg10>                                                                                                                                                                       
+```
+
+Hence the password for the next level is : `terminated!99`

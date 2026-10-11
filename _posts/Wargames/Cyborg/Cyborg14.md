@@ -1,0 +1,57 @@
+---
+title: "Cyborg14 Writeup"
+author: ekansh
+date: 2026-10-11 16:02:15 +0530
+categories: [Wargames, Cyborg]
+tags: [underthewire, cyborg]
+published : true
+---
+
+## Objective :
+
+The password for cyborg15 is the caption for the DCOM application setting for application ID {59B8AFA0-229E-46D9-B980-DDA2C817EC7E} PLUS the name of the file on the desktop.
+
+## Solution :
+
+First we fetch filename of the file present on the desktop : 
+
+```powershell
+PS C:\users\cyborg14\desktop> gci                                                                                                                                                           
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+    Directory: C:\users\cyborg14\desktop                                                                                                                                                    
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+Mode                LastWriteTime         Length Name                                                                                                                                       
+----                -------------         ------ ----                                                                                                                                       
+-a----        8/30/2018  10:45 AM              0 _objects                                                                                                                                   
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+PS C:\users\cyborg14\desktop> 
+```
+
+Next using the following article as refernce : https://powershell.one/wmi/root/cimv2/win32_dcomapplicationsetting
+
+We fetch the caption as follows : 
+
+```powershell
+PS C:\users\cyborg14\desktop> Get-CimInstance -ClassName Win32_DCOMApplicationSetting | Where-Object { $_.AppID -eq "{59B8AFA0-229E-46D9-B980-DDA2C817EC7E}" }                              
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+Caption                   : propshts                                                                                                                                                        
+Description               : propshts                                                                                                                                                        
+SettingID                 :                                                                                                                                                                 
+AppID                     : {59B8AFA0-229E-46d9-B980-DDA2C817EC7E}                                                                                                                          
+AuthenticationLevel       :                                                                                                                                                                 
+CustomSurrogate           :                                                                                                                                                                 
+EnableAtStorageActivation : False                                                                                                                                                           
+LocalService              :                                                                                                                                                                 
+RemoteServerName          :                                                                                                                                                                 
+RunAsUser                 :                                                                                                                                                                 
+ServiceParameters         :                                                                                                                                                                 
+UseSurrogate              : False                                                                                                                                                           
+PSComputerName            :  
+```
+
+Hence the password for the next level is : `propshts_objects`
+And hence we have successfully completed the Cyborg Wargame series with this level!! Meet you all in the next one. 

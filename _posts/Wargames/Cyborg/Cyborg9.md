@@ -29,7 +29,200 @@ Mode                LastWriteTime         Length Name
                                                                                                                                                                                             
 PS C:\users\cyborg9\desktop>   
 ```
+Before beginning to check for Phone number let's try to understand from a profile of a typical ADUser as to under which property name does the number is saved to? :
 
+```powershell
+PS C:\users\cyborg9\desktop> get-aduser century6 -Properties *                                                                                                                              
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+AccountExpirationDate                :                                                                                                                                                      
+accountExpires                       : 9223372036854775807                                                                                                                                  
+AccountLockoutTime                   :                                                                                                                                                      
+AccountNotDelegated                  : False                                                                                                                                                
+AllowReversiblePasswordEncryption    : False                                                                                                                                                
+AuthenticationPolicy                 : {}                                                                                                                                                   
+AuthenticationPolicySilo             : {}                                                                                                                                                   
+BadLogonCount                        : 0                                                                                                                                                    
+badPasswordTime                      : 134360985192040210                                                                                                                                   
+badPwdCount                          : 0                                                                                                                                                    
+CannotChangePassword                 : True                                                                                                                                                 
+CanonicalName                        : underthewire.tech/Games/century6                                                                                                                     
+Certificates                         : {}                                                                                                                                                   
+City                                 :                                                                                                                                                      
+CN                                   : century6                                                                                                                                             
+codePage                             : 0                                                                                                                                                    
+Company                              :                                                                                                                                                      
+CompoundIdentitySupported            : {}                                                                                                                                                   
+Country                              :                                                                                                                                                      
+countryCode                          : 0                                                                                                                                                    
+Created                              : 8/30/2018 3:08:47 AM                                                                                                                                 
+createTimeStamp                      : 8/30/2018 3:08:47 AM                                                                                                                                 
+Deleted                              :                                                                                                                                                      
+Department                           :                                                                                                                                                      
+Description                          :                                                                                                                                                      
+DisplayName                          : century6                                                                                                                                             
+DistinguishedName                    : CN=century6,OU=Games,DC=underthewire,DC=tech                                                                                                         
+Division                             :                                                                                                                                                      
+DoesNotRequirePreAuth                : False                                                                                                                                                
+dSCorePropagationData                : {8/30/2018 3:08:47 AM, 1/1/1601 12:00:00 AM}                                                                                                         
+EmailAddress                         :                                                                                                                                                      
+EmployeeID                           :                                                                                                                                                      
+EmployeeNumber                       :                                                                                                                                                      
+Enabled                              : True                                                                                                                                                 
+Fax                                  :                                                                                                                                                      
+GivenName                            : century                                                                                                                                              
+HomeDirectory                        :                                                                                                                                                      
+HomedirRequired                      : False                                                                                                                                                
+HomeDrive                            :                                                                                                                                                      
+HomePage                             :                                                                                                                                                      
+HomePhone                            :                                                                                                                                                      
+Initials                             :                                                                                                                                                      
+instanceType                         : 4                                                                                                                                                    
+isDeleted                            :                                                                                                                                                      
+KerberosEncryptionType               : {}                                                                                                                                                   
+LastBadPasswordAttempt               : 10/10/2026 9:35:19 AM                                                                                                                                
+LastKnownParent                      :                                                                                                                                                      
+lastLogoff                           : 0                                                                                                                                                    
+lastLogon                            : 134361157970476645                                                                                                                                   
+LastLogonDate                        : 10/5/2026 1:16:55 PM                                                                                                                                 
+lastLogonTimestamp                   : 134356798155633463                                                                                                                                   
+LockedOut                            : False                                                                                                                                                
+logonCount                           : 14370                                                                                                                                                
+LogonWorkstations                    :                                                                                                                                                      
+Manager                              :                                                                                                                                                      
+MemberOf                             : {CN=PSRemoting,CN=Builtin,DC=underthewire,DC=tech, CN=games,OU=Games,DC=underthewire,DC=tech}                                                        
+MNSLogonAccount                      : False                                                                                                                                                
+MobilePhone                          :                                                                                                                                                      
+Modified                             : 10/5/2026 1:16:55 PM                                                                                                                                 
+modifyTimeStamp                      : 10/5/2026 1:16:55 PM                                                                                                                                 
+msDS-User-Account-Control-Computed   : 0                                                                                                                                                    
+Name                                 : century6                                                                                                                                             
+nTSecurityDescriptor                 : System.DirectoryServices.ActiveDirectorySecurity                                                                                                     
+ObjectCategory                       : CN=Person,CN=Schema,CN=Configuration,DC=underthewire,DC=tech                                                                                         
+ObjectClass                          : user                                                                                                                                                 
+ObjectGUID                           : c963054a-abad-41ca-9f68-87b2d0048aa6                                                                                                                 
+objectSid                            : S-1-5-21-758131494-606461608-3556270690-1109                                                                                                         
+Office                               :                                                                                                                                                      
+OfficePhone                          :                                                                                                                                                      
+Organization                         :                                                                                                                                                      
+OtherName                            :                                                                                                                                                      
+PasswordExpired                      : False                                                                                                                                                
+PasswordLastSet                      : 8/30/2018 3:29:32 AM                                                                                                                                 
+PasswordNeverExpires                 : True                                                                                                                                                 
+PasswordNotRequired                  : False                                                                                                                                                
+POBox                                :                                                                                                                                                      
+PostalCode                           :                                                                                                                                                      
+PrimaryGroup                         : CN=Domain Users,CN=Users,DC=underthewire,DC=tech                                                                                                     
+primaryGroupID                       : 513                                                                                                                                                  
+PrincipalsAllowedToDelegateToAccount : {}                                                                                                                                                   
+ProfilePath                          :                                                                                                                                                      
+ProtectedFromAccidentalDeletion      : False                                                                                                                                                
+pwdLastSet                           : 131800733727331993                                                                                                                                   
+SamAccountName                       : century6                                                                                                                                             
+sAMAccountType                       : 805306368                                                                                                                                            
+ScriptPath                           :                                                                                                                                                      
+sDRightsEffective                    : 0                                                                                                                                                    
+ServicePrincipalNames                : {}                                                                                                                                                   
+SID                                  : S-1-5-21-758131494-606461608-3556270690-1109                                                                                                         
+SIDHistory                           : {}                                                                                                                                                   
+SmartcardLogonRequired               : False                                                                                                                                                
+sn                                   : 6                                                                                                                                                    
+State                                :                                                                                                                                                      
+StreetAddress                        :                                                                                                                                                      
+Surname                              : 6                                                                                                                                                    
+Title                                :                                                                                                                                                      
+TrustedForDelegation                 : False                                                                                                                                                
+TrustedToAuthForDelegation           : False                                                                                                                                                
+UseDESKeyOnly                        : False                                                                                                                                                
+userAccountControl                   : 66048                                                                                                                                                
+userCertificate                      : {}                                                                                                                                                   
+UserPrincipalName                    : century6@underthewire.tech                                                                                                                           
+uSNChanged                           : 4037970                                                                                                                                              
+uSNCreated                           : 12859                                                                                                                                                
+whenChanged                          : 10/5/2026 1:16:55 PM                                                                                                                                 
+whenCreated                          : 8/30/2018 3:08:47 AM
+```
+
+In this we can see that property `MobilePhone` holds the Mobile Phone number and we have `OfficePhone` which holds the Office Phone
+, and apart from that there is no other such property. SO we need to focus at `MobilePhone` and `OfficePhone`.
 Now using the article present at : https://learn.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2016-ps
+After multiple different tries and variations, I still failed for some reason : 
 
+```powershell
+PS C:\users\cyborg9\desktop> Get-ADObject -Identity "MobilePhone=*876-5309*"                                                                                                                
+Get-ADObject : Cannot find an object with identity: 'MobilePhone=*876-5309*' under: 'DC=underthewire,DC=tech'.                                                                              
+At line:1 char:1                                                                                                                                                                            
++ Get-ADObject -Identity "MobilePhone=*876-5309*"                                                                                                                                           
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                                                                                                           
+    + CategoryInfo          : ObjectNotFound: (MobilePhone=*876-5309*:ADObject) [Get-ADObject], ADIdentityNotFoundException                                                                 
+    + FullyQualifiedErrorId : ActiveDirectoryCmdlet:Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException,Microsoft.ActiveDirectory.Management.Commands.GetADObject              
+                                                                                                                                                                                            
+PS C:\users\cyborg9\desktop> Get-ADObject -Properties -MobilePhone -eq "*876-5309*"                                                                                                         
+Get-ADObject : A parameter cannot be found that matches parameter name 'eq'.                                                                                                                
+At line:1 char:39                                                                                                                                                                           
++ Get-ADObject -Properties -MobilePhone -eq "*876-5309*"                                                                                                                                    
++                                       ~~~                                                                                                                                                 
+    + CategoryInfo          : InvalidArgument: (:) [Get-ADObject], ParameterBindingException                                                                                                
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.ActiveDirectory.Management.Commands.GetADObject                                                                              
+                                                                                                                                                                                            
+PS C:\users\cyborg9\desktop> Get-ADObject -Properties -MobilePhone -like "*876-5309*"                                                                                                       
+Get-ADObject : A parameter cannot be found that matches parameter name 'like'.                                                                                                              
+At line:1 char:39                                                                                                                                                                           
++ Get-ADObject -Properties -MobilePhone -like "*876-5309*"                                                                                                                                  
++                                       ~~~~~                                                                                                                                               
+    + CategoryInfo          : InvalidArgument: (:) [Get-ADObject], ParameterBindingException                                                                                                
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.ActiveDirectory.Management.Commands.GetADObject                                                                              
+                                                                                                                                                                                            
+PS C:\users\cyborg9\desktop> Get-ADObject -Properties -MobilePhone "*876-5309*"                                                                                                             
+Get-ADObject : Cannot find an object with identity: '*876-5309*' under: 'DC=underthewire,DC=tech'.                                                                                          
+At line:1 char:1                                                                                                                                                                            
++ Get-ADObject -Properties -MobilePhone "*876-5309*"                                                                                                                                        
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                                                                                                        
+    + CategoryInfo          : ObjectNotFound: (*876-5309*:ADObject) [Get-ADObject], ADIdentityNotFoundException                                                                             
+    + FullyQualifiedErrorId : ActiveDirectoryCmdlet:Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException,Microsoft.ActiveDirectory.Management.Commands.GetADObject              
+                                                                                                                                                                                            
+PS C:\users\cyborg9\desktop> Get-ADObject -Properties -MobilePhone "*"                                                                                                                      
+Get-ADObject : Cannot find an object with identity: '*' under: 'DC=underthewire,DC=tech'.                                                                                                   
+At line:1 char:1                                                                                                                                                                            
++ Get-ADObject -Properties -MobilePhone "*"                                                                                                                                                 
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                                                                                                                 
+    + CategoryInfo          : ObjectNotFound: (*:ADObject) [Get-ADObject], ADIdentityNotFoundException                                                                                      
+    + FullyQualifiedErrorId : ActiveDirectoryCmdlet:Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException,Microsoft.ActiveDirectory.Management.Commands.GetADObject              
+                                                                                                                                                                                            
+PS C:\users\cyborg9\desktop> Get-ADUser -Filter 'MobilePhone -like "*"' -Properties MobilePhone                                                                                             
+PS C:\users\cyborg9\desktop>
+```
 
+Now the last output here is odd. The last command tries to filter out from all ADUsers present who have a MobilePhone number present. But looks like no ADUser has a MobilePhone property 
+set? 
+
+So I try another method which is a little more manual and it worked this time. Basically , I put all the user's and their properties in a variable and then printed them all in a table 
+and then manually scroll a bit to check for the required number. 
+
+```powershell
+PS C:\users\cyborg9\desktop> $A = Get-ADUser -Filter * -Properties *                                                                                                                        
+PS C:\users\cyborg9\desktop> $A | Format-Table -Property Name,OfficePhone,MobilePhone                                                                                                       
+                                                                                                                                                                                            
+Name                      OfficePhone MobilePhone                                                                                                                                           
+----                      ----------- -----------                                                                                                                                           
+Administrator                                                                                                                                                                               
+Guest                                            
+[ . . . ]
+Garick, Onita             876-5309     
+[ . . . ]
+```
+
+A smarter way to do this instead of scrolling manually. 
+
+```powershell
+PS C:\users\cyborg9\desktop> $A | Where-Object { ($_.OfficePhone -like "*876-5309*") -or ($_.MobilePhone -like "*876-5309*") } | Format-Table -Property Name,OfficePhone,MobilePhone        
+                                                                                                                                                                                            
+Name             OfficePhone MobilePhone                                                                                                                                                    
+----             ----------- -----------                                                                                                                                                    
+Garick, Onita    876-5309                                                                                                                                                                   
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+PS C:\users\cyborg9\desktop>     
+```
+
+Hence the answer for the next level is : `"onita99"`
